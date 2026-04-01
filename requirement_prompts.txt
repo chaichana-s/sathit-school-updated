@@ -1,0 +1,159 @@
+You're a senior front-end developer who specializes in modern aesthetic design using
+HTML5, css3, bootstrap 5, jquery, and javascript.
+
+I'm developing a school management project. The school name was สาธิตวิทยา which consists of
+Module 1: ระบบจัดการข้อมูลพื้นฐาน (Master Data Management) 
+
+ระบบต้องรองรับการเพิ่ม ลบ แก้ไข และแสดงผลข้อมูล (CRUD Operations) สำหรับหมวดหมู่ดังต่อไปนี้: 
+
+- ข้อมูลบุคลากรครู (Teachers): รหัสประจำตัว, ชื่อ-นามสกุล, เบอร์โทรศัพท์, หมวดวิชาที่สังกัด 
+
+- ข้อมูลนักเรียน (Students): รหัสประจำตัวนักเรียน, ชื่อ-นามสกุล, วัน/เดือน/ปีเกิด, และชั้นเรียนที่สังกัด 
+
+- ข้อมูลรายวิชา (Subjects): รหัสวิชา, ชื่อวิชา, จำนวนหน่วยกิต 
+
+- ข้อมูลระดับชั้นเรียน (Classes): รหัสชั้นเรียน, ชื่อชั้นเรียน (เช่น ม.1/1, ม.2/3) 
+
+- ข้อมูลห้องเรียน (Classrooms): รหัสห้อง, หมายเลขห้อง (เช่น ห้อง 401, วิทยาศาสตร์ 1) 
+
+ 
+
+Module 2: ระบบจัดการตารางเรียน (Schedule Management) 
+
+- ระบบสามารถเชื่อมโยงข้อมูลจาก Module 1 เพื่อสร้างตารางเรียนได้ 
+
+- สามารถระบุได้ว่า "วิชาใด" สอนโดย "ครูท่านใด" ให้กับ "ชั้นเรียนใด" ที่ "ห้องเรียนไหน" ในวันและเวลาใด 
+
+- เงื่อนไขทางธุรกิจ (Business Logic): หน้าจอการจัดตารางเรียนต้องใช้งานง่าย โดยดึงข้อมูลมาแสดงเป็นตัวเลือก (Dropdown) เพื่อลดข้อผิดพลาดจากการพิมพ์ 
+
+ 
+
+Module 3: ระบบบันทึกผลการเรียน (Grading System) 
+
+- ระบบอนุญาตให้ผู้ใช้งานเลือกวิชาและชั้นเรียน เพื่อดึงรายชื่อนักเรียนในชั้นเรียนนั้นขึ้นมาแสดง 
+
+- สามารถกรอกคะแนนดิบ (Raw Score) เต็ม 100 คะแนน 
+
+- เงื่อนไขทางธุรกิจ (Business Logic): ระบบต้องคำนวณเกรดอัตโนมัติตามเกณฑ์ดังนี้ และบันทึกลงฐานข้อมูล: 
+
+คะแนน 80 - 100 ได้เกรด 4 
+
+คะแนน 70 - 79 ได้เกรด 3 
+
+คะแนน 60 - 69 ได้เกรด 2 
+
+คะแนน 50 - 59 ได้เกรด 1 
+
+คะแนน 0 - 49 ได้เกรด 0 
+
+ 
+
+Module 4: ระบบยืนยันตัวตนและกำหนดสิทธิ์การใช้งาน (Authentication & Role-Based Access Control - RBAC) 
+
+- ระบบต้องมีหน้า Login ที่ปลอดภัย ป้องกันการโจมตีแบบ SQL Injection และใช้การเข้ารหัสรหัสผ่าน (Password Hashing) 
+
+- เงื่อนไขทางธุรกิจ: แบ่งสิทธิ์ผู้ใช้งานออกเป็น 3 ระดับ ได้แก่: 
+
+1. ผู้ดูแลระบบ (Admin): เข้าถึงได้ทุกฟังก์ชัน จัดการข้อมูลพื้นฐานได้ทั้งหมด 
+
+2. ครูผู้สอน (Teacher): ดูตารางสอนของตนเอง, เช็คชื่อนักเรียน, และบันทึกคะแนน/ตัดเกรดได้เฉพาะรายวิชาที่ตนเองสอนเท่านั้น 
+
+3. นักเรียน (Student): เข้าสู่ระบบเพื่อดูตารางเรียนและผลการเรียนของตนเองเท่านั้น ไม่สามารถแก้ไขข้อมูลใดๆ ได้ 
+
+ 
+
+Module 5: ระบบบันทึกเวลาเรียน (Attendance Tracking System) 
+
+- ฟังก์ชันสำหรับครูผู้สอนเพื่อใช้เช็คชื่อนักเรียนรายคาบเรียน 
+
+- เงื่อนไขทางธุรกิจ: ดึงข้อมูลนักเรียนตามรายวิชาและตารางเรียนในวันนั้นๆ โดยมีสถานะให้เลือกคือ "มาเรียน (Present)", "ขาด (Absent)", "สาย (Late)", และ "ลา (Leave)" 
+
+- ข้อกำหนดทางเทคนิค: หน้าจอเช็คชื่อต้องสามารถกดเปลี่ยนสถานะนักเรียนได้ทันทีโดยไม่ต้องโหลดหน้าเว็บใหม่ (ใช้วิธี Toggle สถานะผ่าน jQuery AJAX) 
+
+ 
+
+Module 6: ระบบรายงานและแดชบอร์ดผู้บริหาร (Dashboard & Analytics) 
+
+- หน้าจอสรุปข้อมูลภาพรวมของโรงเรียนเมื่อ Admin ล็อกอินเข้าสู่ระบบ 
+
+- เงื่อนไขทางธุรกิจ: แสดงสถิติจำนวนครู, นักเรียน, และรายวิชาทั้งหมด รวมถึงกราฟสรุปสถิติการมาเรียนของนักเรียน และกราฟสรุปภาพรวมผลการเรียน (Grade Distribution) 
+
+- ข้อกำหนดทางเทคนิค: ใช้ไลบรารี Chart.js หรือ ApexCharts ในการสร้างกราฟ โดยดึงข้อมูลแบบ Real-time จาก MySQL ผ่าน PHP API ในรูปแบบ JSON
+
+do the following:
+1. analyze the scope and requirement of the system according to what is metioned above.
+2. design a front page of this system which is a page for administrator. Design a menu
+   with an appropriate, clean, and modern feeling for example.
+
+design the structure of the profile to make it easy to manage.
+- bundle all css code into style.css file.
+- bundle all javascript code into script.js file.
+- structure file & folders appropriately based on best practices.
+- put all images in /images folder.
+- separate sidebar menu, header, and footer into separate files and include them into every page.
+- support for responsive design.
+- use modern, aesthetic, and clean theme with vintage, early 20th century feelings.
+- sidebar menu can be toggled on/off.
+
+Design an appropriate favicon and put them into a website. The favicon design must be a knight riding a horse with a shield, indicating a christian school.
+
+Your're a senior backend web developer who specialzies in PHP, MySQL, backend and web security. 
+Design and develop a login page for this system. The login page must be secure and prevent SQL injection and other common web vulnerabilities. 
+
+Do the following:
+1. Analyze the login page requirements and design an appropriate login page for this system.
+2. Design the login page with a modern, aesthetic, and clean theme with vintage, early 20th century feelings.
+3. Implement the login page with PHP and MySQL.
+4. Implement security measures to prevent SQL injection and other common web vulnerabilities.
+5. Implement a password hashing mechanism to securely store user passwords.
+6. Implement a session management system to securely manage user sessions.
+7. Implement a role-based access control system to securely manage user roles.
+8. Implement a logout mechanism to securely log out users.
+9. Implement a forgot password mechanism to securely reset user passwords.
+10. Implement a change password mechanism to securely change user passwords.
+11. Implement a forgot password mechanism to securely reset user passwords.
+12. Implement a change password mechanism to securely change user passwords.
+13. When the user landed on the web page, send them to this login page.
+
+User in the system are as follows:
+1. Admin: Full access to all features.
+2. Teacher: Can access all features except admin features.
+3. Student: Can only access their own profile and grades.
+
+Generate custom data for testing purposes.
+1. Generate 100 students with random names, ages, and grades.
+2. Generate 10 teachers with random names and subjects.
+3. Generate 5 classes with random names and grades.
+
+Design and implement a database for this system. The database must be secure and prevent SQL injection and other common web vulnerabilities. 
+
+Do the following:
+1. Analyze the database requirements and design an appropriate database for this system.
+2. Design the database with a modern, aesthetic, and clean theme with vintage, early 20th century feelings.
+3. Implement the database with PHP and MySQL.
+4. Implement security measures to prevent SQL injection and other common web vulnerabilities.
+
+Create a page for each sub pages residing in master data menu.
+1. บุคลากรครู (Teacher)
+2. ข้อมูลนักเรียน (Student)
+3. ข้อมูลรายวิชา (Subject)
+4. ระดับชั้นเรียน (Class Level)
+5. ห้องเรียน (Classroom)
+
+For each page implement the following:
+1. A table to display the data.
+2. A form to add new data.
+3. A form to edit existing data.
+4. A form to delete existing data.
+5. A search function to search for data.
+6. A sort function to sort data.
+7. A pagination function to paginate data.
+8. A role-based access control system to securely manage user roles.
+9. A logout mechanism to securely log out users.
+10. A forgot password mechanism to securely reset user passwords.
+11. A change password mechanism to securely change user passwords.
+12. A forgot password mechanism to securely reset user passwords.
+13. A change password mechanism to securely change user passwords.
+14. When the user landed on the web page, send them to this login page.
+
+Design and implement attendance, gradomg. RBAC, and general setting pages.
