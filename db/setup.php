@@ -208,7 +208,7 @@ try {
         $randomTimestamp = mt_rand($startTimestamp, $endTimestamp);
         $dob = date("Y-m-d", $randomTimestamp);
         
-        $classId = rand(1, 5); // 5 classes available
+        $classId = rand(1, 6); // 6 classes available
         $sPrefixes = ['ด.ช.', 'ด.ญ.', 'นาย', 'นางสาว'];
         $sPrefix = $sPrefixes[array_rand($sPrefixes)];
         
@@ -237,7 +237,6 @@ try {
     echo "Generated mock schedule data.<br>";
 
     // 10. Generate Mock Attendance
-    $today = date('Y-m-d');
     $stmtAttendance = $pdo->prepare("INSERT INTO attendance (schedule_id, student_id, attendance_date, status, recorded_by) VALUES (?, ?, ?, ?, ?)");
     
     // For Class 1 (ม.1/1) Students, let's look up some IDs (assuming IDs 1-20 are in Class 1)
@@ -245,16 +244,21 @@ try {
     $class1Students = $stmtStudentsClass1->fetchAll(PDO::FETCH_COLUMN);
 
     if ($class1Students) {
-        // Teacher 1 (Admin/Teacher User ID ~2) records attendance for Schedule 1
         $recordedByUserId = 2; 
 
-        foreach ($class1Students as $student_id) {
-            $statuses = ['Present', 'Present', 'Present', 'Late', 'Absent', 'Leave'];
-            $randStatus = $statuses[array_rand($statuses)];
-            $stmtAttendance->execute([1, $student_id, $today, $randStatus, $recordedByUserId]);
-            $stmtAttendance->execute([2, $student_id, $today, $randStatus, $recordedByUserId]); // another period
+        for ($i = 0; $i < 7; $i++) {
+            $currentDate = date('Y-m-d', strtotime("-$i days"));
+            $dayOfWeek = date('w', strtotime($currentDate));
+            if ($dayOfWeek == 0 || $dayOfWeek == 6) continue; // Skip weekends
+            
+            foreach ($class1Students as $student_id) {
+                $statuses = ['Present', 'Present', 'Present', 'Present', 'Late', 'Absent', 'Leave'];
+                $randStatus = $statuses[array_rand($statuses)];
+                $stmtAttendance->execute([1, $student_id, $currentDate, $randStatus, $recordedByUserId]);
+                $stmtAttendance->execute([2, $student_id, $currentDate, $randStatus, $recordedByUserId]); // another period
+            }
         }
-        echo "Generated mock attendance data for today ($today).<br>";
+        echo "Generated mock attendance data for the past 7 days.<br>";
     }
 
     // 11. Generate Mock Grades

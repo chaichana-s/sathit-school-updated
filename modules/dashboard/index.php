@@ -33,7 +33,7 @@ $attRecent = $pdo->query("
     JOIN classes c ON sch.class_id = c.id
     JOIN subjects sub ON sch.subject_id = sub.id
     LEFT JOIN users u ON a.recorded_by = u.id
-    ORDER BY a.updated_at DESC
+    ORDER BY a.created_at DESC
     LIMIT 3
 ")->fetchAll(PDO::FETCH_ASSOC);
 
